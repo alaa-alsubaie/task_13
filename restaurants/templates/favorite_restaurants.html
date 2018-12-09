@@ -4,16 +4,9 @@
 
 {% block content %}
 <br>
-<form action="{% url 'restaurant-list' %}">
-  <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search" aria-label="Search" name="q" value="{{request.GET.q}}">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </div>
-  </div>
-</form>
+
 <div class="row">
-    {% for restaurant in restaurants %}
+    {% for restaurant in fav_restaurant %}
     <div class="col-md-4">
         <div class="card my-card">
           {% if restaurant.logo %}
@@ -27,7 +20,7 @@
             <li class="list-group-item text-center">
                 <a href="{% url 'restaurant-detail' restaurant.id %}" class="btn btn-outline-dark">View</a>
                 <button class="btn btn-light " ><i class="fas fa-star {% if restaurant in fav_restaurant %} text-warning {% endif %}" id="fav-{{restaurant.id}}"  onclick="fav({{restaurant.id}}) "></i></button>
-
+    
             </li>
           </ul>
         </div>
@@ -35,35 +28,6 @@
     {% endfor %}
 </div>
 
-    <script >
-      function fav(id){
-        var fav = "#fav-"+id
-        //alert("fav"+id);
-        $.ajax(
-        {
-          type: "GET",
-          url: "/restaurants/"+id+"/favorite/",
-          error: function(){
-            alert("something went wrong!!");
-          },
-          success:function(data){
-            if(data.action === "favorite"){
-              $(fav).addClass("text-warning");
-            }
-            else{
-              $(fav).removeClass("text-warning")
-            }
-            //alert("success");
-            //alert(data.action);
-           
-          }
-  
-        })
-      }
-    
 
 
-
-    </script>
 {% endblock content %}
-
