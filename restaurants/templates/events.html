@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock title %}
+
+{% block content %}
+<br>
+<div class="row">
+    {% for event in events %}
+    <div class="col-md-4">
+        <div class="card my-card">
+          <div class="card-body">
+            <h5 class="card-title">{{event.type}}</h5>
+          </div>
+          
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+ 
+{% endblock content %}
+
