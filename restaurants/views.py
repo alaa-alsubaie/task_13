@@ -8,14 +8,59 @@ import requests
 
 # This view will be used to favorite a restaurant
 
+#https://api.github.com/orgs/joincoded/members
+#https://api.github.com/events
 def api_test(request):
-    response = requests.get('https://api.github.com/events')
+
+    api_key = "11764232" #from The Open Movie Database (omdbapi)
+    query = "harry"
+    url = 'http://www.omdbapi.com/?apikey=%s&s=%s'%(api_key,query)
+    response = requests.get(url)
     jresponse = response.json()
+    
+    #return JsonResponse(jresponse,safe=False)
 
     context = {
-        "events": jresponse,
+        "movies": jresponse,  
     }
-    return render(request, 'events.html',context)
+
+    return render(request, 'movies.html',context)
+
+    
+    
+    # api_key = "11764232" #from The Open Movie Database (omdbapi)
+    # query = request.GET.get('q')
+    # if query:
+    #     url = 'http://www.omdbapi.com/?apikey=%s&s=%s'%(api_key,query)
+    #     response = requests.get(url)
+    #     response = response.filter(
+    #             Q(Poster__icontains=query)|
+    #             Q(Title__icontains=query)|
+    #             Q(Type__icontains=query)
+    #         ).distinct()
+    #     jresponse = response.json()
+    
+    # #return JsonResponse(jresponse,safe=False)
+
+    # context = {
+    #     "movies": jresponse,  
+    # }
+
+    # return render(request, 'movies.html',context)
+
+
+
+
+   
+
+
+    #response = requests.get('https://api.github.com/emojis')
+    # response = requests.get('https://api.github.com/users/alaa-alsubaie/repos')
+    # jresponse = response.json()
+    # context = {
+    #     "events": jresponse,
+    # }
+    # return render(request, 'emojis.html',context)
 
 
 
