@@ -12,21 +12,34 @@ import requests
 #https://api.github.com/events
 def api_test(request):
 
-    api_key = "11764232" #from The Open Movie Database (omdbapi)
-    query = "harry"
-    url = 'http://www.omdbapi.com/?apikey=%s&s=%s'%(api_key,query)
+    url = 'https://pokeapi.co/api/v2/ability/7/'
     response = requests.get(url)
     jresponse = response.json()
     
     #return JsonResponse(jresponse,safe=False)
 
     context = {
-        "movies": jresponse,  
+        "poke": jresponse,  
     }
 
-    return render(request, 'movies.html',context)
+    return render(request, 'poke.html',context)
 
+#---------------- The Open Movie Database (omdbapi) ---------------
+    # api_key = "11764232" #from The Open Movie Database (omdbapi)
+    # query = "harry"
+    # url = 'http://www.omdbapi.com/?apikey=%s&s=%s'%(api_key,query)
+    # response = requests.get(url)
+    # jresponse = response.json()
     
+    # #return JsonResponse(jresponse,safe=False)
+
+    # context = {
+    #     "movies": jresponse,  
+    # }
+
+    # return render(request, 'movies.html',context)
+#------------------------------------------------------------------------
+
     
     # api_key = "11764232" #from The Open Movie Database (omdbapi)
     # query = request.GET.get('q')
