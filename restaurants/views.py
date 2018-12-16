@@ -12,14 +12,14 @@ import requests
 #https://api.github.com/events
 def api_test(request):
 
-    url = 'https://pokeapi.co/api/v2/ability/7/'
+    url= 'https://pokeapi.co/api/v2/pokemon/'
     response = requests.get(url)
     jresponse = response.json()
     
     #return JsonResponse(jresponse,safe=False)
-
     context = {
         "poke": jresponse,  
+       
     }
 
     return render(request, 'poke.html',context)
